@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InscricoesRouteImport } from './routes/inscricoes'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as BeneficiariosIndexRouteImport } from './routes/beneficiarios/index'
+import { Route as BeneficiariosIdRouteImport } from './routes/beneficiarios/$id'
+import { Route as BeneficiariosNovoRouteImport } from './routes/beneficiarios/novo'
+import { Route as EventosIndexRouteImport } from './routes/eventos/index'
+import { Route as EventosIdRouteImport } from './routes/eventos/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InscricoesRoute = InscricoesRouteImport.update({
+  id: '/inscricoes',
+  path: '/inscricoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeneficiariosIndexRoute = BeneficiariosIndexRouteImport.update({
+  id: '/beneficiarios/',
+  path: '/beneficiarios/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeneficiariosIdRoute = BeneficiariosIdRouteImport.update({
+  id: '/beneficiarios/$id',
+  path: '/beneficiarios/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeneficiariosNovoRoute = BeneficiariosNovoRouteImport.update({
+  id: '/beneficiarios/novo',
+  path: '/beneficiarios/novo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventosIndexRoute = EventosIndexRouteImport.update({
+  id: '/eventos/',
+  path: '/eventos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventosIdRoute = EventosIdRouteImport.update({
+  id: '/eventos/$id',
+  path: '/eventos/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/inscricoes': typeof InscricoesRoute
+  '/login': typeof LoginRoute
+  '/beneficiarios/$id': typeof BeneficiariosIdRoute
+  '/beneficiarios/novo': typeof BeneficiariosNovoRoute
+  '/eventos/$id': typeof EventosIdRoute
+  '/beneficiarios/': typeof BeneficiariosIndexRoute
+  '/eventos/': typeof EventosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/inscricoes': typeof InscricoesRoute
+  '/login': typeof LoginRoute
+  '/beneficiarios/$id': typeof BeneficiariosIdRoute
+  '/beneficiarios/novo': typeof BeneficiariosNovoRoute
+  '/eventos/$id': typeof EventosIdRoute
+  '/beneficiarios': typeof BeneficiariosIndexRoute
+  '/eventos': typeof EventosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/inscricoes': typeof InscricoesRoute
+  '/login': typeof LoginRoute
+  '/beneficiarios/$id': typeof BeneficiariosIdRoute
+  '/beneficiarios/novo': typeof BeneficiariosNovoRoute
+  '/eventos/$id': typeof EventosIdRoute
+  '/beneficiarios/': typeof BeneficiariosIndexRoute
+  '/eventos/': typeof EventosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/inscricoes'
+    | '/login'
+    | '/beneficiarios/$id'
+    | '/beneficiarios/novo'
+    | '/eventos/$id'
+    | '/beneficiarios/'
+    | '/eventos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/inscricoes'
+    | '/login'
+    | '/beneficiarios/$id'
+    | '/beneficiarios/novo'
+    | '/eventos/$id'
+    | '/beneficiarios'
+    | '/eventos'
+  id:
+    | '__root__'
+    | '/'
+    | '/inscricoes'
+    | '/login'
+    | '/beneficiarios/$id'
+    | '/beneficiarios/novo'
+    | '/eventos/$id'
+    | '/beneficiarios/'
+    | '/eventos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InscricoesRoute: typeof InscricoesRoute
+  LoginRoute: typeof LoginRoute
+  BeneficiariosIdRoute: typeof BeneficiariosIdRoute
+  BeneficiariosNovoRoute: typeof BeneficiariosNovoRoute
+  EventosIdRoute: typeof EventosIdRoute
+  BeneficiariosIndexRoute: typeof BeneficiariosIndexRoute
+  EventosIndexRoute: typeof EventosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inscricoes': {
+      id: '/inscricoes'
+      path: '/inscricoes'
+      fullPath: '/inscricoes'
+      preLoaderRoute: typeof InscricoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beneficiarios/': {
+      id: '/beneficiarios/'
+      path: '/beneficiarios'
+      fullPath: '/beneficiarios/'
+      preLoaderRoute: typeof BeneficiariosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beneficiarios/$id': {
+      id: '/beneficiarios/$id'
+      path: '/beneficiarios/$id'
+      fullPath: '/beneficiarios/$id'
+      preLoaderRoute: typeof BeneficiariosIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beneficiarios/novo': {
+      id: '/beneficiarios/novo'
+      path: '/beneficiarios/novo'
+      fullPath: '/beneficiarios/novo'
+      preLoaderRoute: typeof BeneficiariosNovoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eventos/': {
+      id: '/eventos/'
+      path: '/eventos'
+      fullPath: '/eventos/'
+      preLoaderRoute: typeof EventosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eventos/$id': {
+      id: '/eventos/$id'
+      path: '/eventos/$id'
+      fullPath: '/eventos/$id'
+      preLoaderRoute: typeof EventosIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InscricoesRoute: InscricoesRoute,
+  LoginRoute: LoginRoute,
+  BeneficiariosIdRoute: BeneficiariosIdRoute,
+  BeneficiariosNovoRoute: BeneficiariosNovoRoute,
+  EventosIdRoute: EventosIdRoute,
+  BeneficiariosIndexRoute: BeneficiariosIndexRoute,
+  EventosIndexRoute: EventosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
