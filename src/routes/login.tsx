@@ -18,11 +18,23 @@ export const Route = createFileRoute("/login")({
 });
 
 function authErrorMessage(message: string): string {
+  console.warn("[auth]", message);
   if (/invalid login credentials/i.test(message)) return "E-mail ou senha incorretos.";
   if (/email not confirmed/i.test(message)) return "Confirme seu e-mail antes de entrar.";
   if (/already registered/i.test(message)) return "Este e-mail já tem conta. Use a aba Entrar.";
-  if (/password/i.test(message)) return "A senha precisa ter pelo menos 6 caracteres.";
-  return "Não foi possível concluir. Tente novamente.";
+  if (/weak|pwned|leaked|known to be|easy to guess/i.test(message))
+    return "Esta senha é fraca ou já apareceu em vazamentos de dados. Escolha outra, com letras, números e símbolos.";
+  if (/at least \d+ characters|too short/i.test(message)) {
+    const n = /at least (\d+)/i.exec(message)?.[1] ?? "6";
+    return `A senha precisa ter pelo menos ${n} caracteres.`;
+  }
+  if (/should contain|must contain|characters? of each/i.test(message))
+    return "A senha precisa misturar letras maiúsculas, minúsculas, números e símbolos.";
+  if (/rate limit|too many/i.test(message)) return "Muitas tentativas. Aguarde alguns minutos.";
+  if (/signups not allowed|signup.*disabled/i.test(message))
+    return "A criação de contas está desativada.";
+  // Motivo não mapeado: mostra o texto original para não esconder a causa.
+  return `Não foi possível concluir: ${message}`;
 }
 
 function LoginPage() {
